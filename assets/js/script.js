@@ -11,8 +11,10 @@ let autoPlay;
 
 // Initialize
 function init() {
-    showSlide(currentSlide);
-    startAutoPlay();
+    if (slides.length > 0) {
+        showSlide(currentSlide);
+        startAutoPlay();
+    }
 }
 
 // Show Slide
@@ -54,17 +56,21 @@ function stopAutoPlay() {
 }
 
 // Event Listeners
-nextBtn.addEventListener('click', () => {
-    stopAutoPlay();
-    nextSlide();
-    startAutoPlay();
-});
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        startAutoPlay();
+    });
+}
 
-prevBtn.addEventListener('click', () => {
-    stopAutoPlay();
-    prevSlide();
-    startAutoPlay();
-});
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        startAutoPlay();
+    });
+}
 
 indicators.forEach((indicator, index) => {
     indicator.addEventListener('click', () => {
@@ -76,8 +82,10 @@ indicators.forEach((indicator, index) => {
 
 // Pause on hover (Optional, improves UX)
 const container = document.querySelector('.carousel-container');
-container.addEventListener('mouseenter', stopAutoPlay);
-container.addEventListener('mouseleave', startAutoPlay);
+if (container) {
+    container.addEventListener('mouseenter', stopAutoPlay);
+    container.addEventListener('mouseleave', startAutoPlay);
+}
 
 // Mobile Navigation Toggle
 if (navToggle) {
